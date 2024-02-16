@@ -17,7 +17,7 @@ class SetupServer(commands.Cog):
         await ctx.defer()
 
         if commands.bot_has_permissions(administrator=True):
-            await ctx.send("Setup the Server")
+            await ctx.send("Setup the Serve")
 
 
 def setup(bot: discord.Bot):
