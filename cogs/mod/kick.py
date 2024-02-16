@@ -27,7 +27,7 @@ class KickCommand(commands.Cog):
             )
             em1.add_field(name="Moderator", value=f"{ctx.author.mention} | `{ctx.author.id}`", inline=False)
             em1.add_field(name="Reason", value=reason, inline=False)
-            em1.add_field(name="Member Kicked", value=member.mention, inline=False)
+            em1.add_field(name="Member Kicked", value=f"{member.mention} | `{member.id}`", inline=False)
             file1 = discord.File("img/Imageline.png", filename="Imageline.png")
             em1.set_image(url="attachment://Imageline.png")
             em1.set_footer(text=self.bot.user.name, icon_url=self.bot.user.avatar.url)
