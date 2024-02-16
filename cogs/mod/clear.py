@@ -16,6 +16,7 @@ class ClearCommand(commands.Cog):
         msgs: Option(int, "The number of messages to delete"),
         reason: Option(str, "The reason for the deletion")
     ):
+        await ctx.defer()
         if commands.bot_has_guild_permissions(manage_messages=True):
             if msgs <= 0:
                 em2 = discord.Embed(color=MainColor)
@@ -37,8 +38,8 @@ class ClearCommand(commands.Cog):
                 return
             
             else:
-                messages = await ctx.channel.history(limit=msgs + 1).flatten()
-                await ctx.channel.delete_messages(messages)
+                async for message in ctx.channel.history(limit=msgs):
+                    await message.delete()
 
                 em0 = discord.Embed(color=MainColor)
                 file0 = discord.File("img/Delete.png", filename="Delete.png")
@@ -58,7 +59,6 @@ class ClearCommand(commands.Cog):
                 em1.set_thumbnail(url=self.bot.user.avatar.url)
 
                 msg = await ctx.send(embeds=[em0, em1], files=[file0, file1])
-                await ctx.respond("Succesfully deleted Messages", ephemeral=True)
                 await asyncio.sleep(10)
                 await msg.delete()
 
